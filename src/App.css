@@ -1,0 +1,126 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 22px;
+}
+body{
+  /* isplay: flex; */
+  width: 100%;
+  height: 100%;
+  font-family: monospace;
+}
+/* Hide the scrollbar for Chrome, Safari, and Edge */
+.main::-webkit-scrollbar {
+  display:none; /* Hides the scrollbar */
+}
+.App{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-height: 100vh;
+  background-color: bisque;
+}
+.header{
+  background-color: rgb(132, 0, 255);
+  color: white;
+}
+h1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.addForm,.searchForm{
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+}
+#formLabel,#searchLabel{
+  position: fixed;
+  left: -1000px;
+} 
+#formInput ,.searchInput{
+  font-size: 25px;
+  padding: 5px 15px;
+  flex-grow: 1;
+  border-radius: 10px;
+  margin: 5px;
+  
+  color: black;
+}
+.formButton{
+  font-size: 30px;
+  font-weight: 700;
+  padding:  0 5px;
+  border-radius: 13px;
+  margin: 5px 0 ;
+  min-width: 36px;
+  color: blueviolet;
+  border: 3px solid rgb(238, 130, 135) ;
+  background-color: aquamarine;
+}
+.formButton:focus{
+  background-color: black;
+}
+.main{
+  display: flex;
+  flex-direction: column;
+  background-color: brown;
+  flex: 1 1 auto;
+  overflow-y: scroll;
+}
+.list{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: yellow;
+  margin: 5px;
+  border: 3px solid rgb(24, 101, 101);
+  border-radius: 20px;
+  padding: 10px;
+}
+.list div{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+input[type="checkbox"]{
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;  
+}
+.listButton{
+  border: none;
+  background-color: rgba(255, 77, 0, 0.721);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px ;
+  font-weight: 600;
+}
+.listButton:hover{
+  background-color: rgb(255, 77, 0);
+}
+
+main>p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
+}
+.footer{
+  background-color: aquamarine;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+.searchItem{
+  display: flex;
+}
+
+
+
+

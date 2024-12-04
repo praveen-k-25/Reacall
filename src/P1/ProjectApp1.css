@@ -1,0 +1,21 @@
+body{
+    width:100vw;
+    height: 100vh;
+}
+.square{
+    width: 50%;
+    height: 250px;
+    border: 2px solid red;
+}
+.square{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+}
+.white{
+    color: white;
+}
+.black{
+    color: black;
+}
