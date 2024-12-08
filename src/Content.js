@@ -36,7 +36,7 @@ import ItemsList from './ItemsList';
         setCount((count) => {return count + 1});
         setCount(count +1);
     } */
- 
+  
     // ---------------- LIST AND KEYS --------------
     const Content = ({items,setItems,handleCheck,deleteItem}) => {
   return (

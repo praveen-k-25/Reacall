@@ -8,7 +8,8 @@ import SearchItem from './SearchItem';
 import apiRequest from './apiRequest';
 
 function App() {
-  const API_URL = "C:\Users\kvetr\Desktop\praveen\praveen\data\db.json"
+
+  const API_URL = "http://localhost:3500/items"
   const [items,setItems] = useState([]); 
   const [newItem, setNewItem] = useState('');
   const [search,setSearch] = useState('');
@@ -19,17 +20,15 @@ function App() {
   useEffect(()=>{
     const fetchItems = async()=>{
       try{
-        const response = (await fetch(API_URL));
-        if(!response.ok) throw Error("Data Not Found");
+        const response = await fetch(API_URL);        
+        if(!response.ok) throw Error("no its is an error")
         const listItems = await response.json();
-        console.log(listItems.items);
-        
-        setItems(listItems.items);
-        setFetchError(null);
+        console.log(listItems);       
+        setItems(listItems);
       } catch(err){
         setFetchError(err.message)
       } finally{
-        setIsLoading(false)
+        setIsLoading(false) 
       }
     }
     setTimeout(()=>{
@@ -45,53 +44,54 @@ function App() {
       setItems(listItems)
       /* localStorage.setItem("to-do-list",JSON.stringify(listItems)); */
 
-      const myItem = listItems.filter((item)=> item.id === id  )
-
-      const updateOption = {
-        method :'PATCH',
-        headers : {
+      const myItem = listItems.filter((item =>
+        item.id === id
+      ))
+      const optionObj = {
+        method : "PATCH",
+        header :{
           'Content-Type':'application/json'
         },
-        body :JSON.stringify(myItem[0].checked)
+        body   : JSON.stringify({checked:myItem[0].checked})
       }
-
-      const reqUrl = `${API_URL}/${id}`;
-      const result = await apiRequest(reqUrl,updateOption,null)
-      if(!result) setFetchError(result)
-  }
+      const reqUrl = `${API_URL}/${id}`
+      const result = await apiRequest(reqUrl,optionObj);
+      if (result) setFetchError(result)
+      }
+  
 
   const deleteItem = async(id)=>{
       const listItems = items.filter((item) =>item.id !== id)
       setItems(listItems);
       /* console.log(listItems); */
       /* localStorage.setItem("to-do-list",JSON.stringify(listItems)); */
-      const deleteOptions = {
-        method:'DELETE'
-      }
       const reqUrl = `${API_URL}/${id}`
-      const result = await apiRequest(API_URL,deleteOptions);
-      if(result) setFetchError(result)
+      const deleteObj = {
+        method : 'DELETE'
+      }
+      const result = await apiRequest(reqUrl,deleteObj);
+      if (result) setFetchError(result)
   }
 
 const addItem = async (newItem)=>{
   const addNewItem = {id: ((items.length === 0) ? 1:items[items.length-1].id+1),checked:true,item:newItem};
-  const listItems = [...items,addNewItem];
+  /* const listItems = [...items,addNewItem];
   setItems(listItems)
-  console.log(JSON.stringify(addNewItem));
+  console.log(JSON.stringify(addNewItem)); */
   
   /* localStorage.setItem("to-do-list",JSON.stringify(listItems)); */
- // API update -  CRUD Operation ---> CREATE operation
-  const postOptions = {
-    method: 'POST',
-    headers : {
-      'Content-Type':"application/json",
+
+ // API ADD ITEM -  CRUD Operation ---> CREATE operation
+ 
+  const optionObj = {
+    method : "POST",
+    header : {
+        'Content-Type' : 'appliction/json'
     },
-    body:JSON.stringify(addNewItem)
+    body   : JSON.stringify(addNewItem)
   }
-  const result = await apiRequest(API_URL,postOptions);
-  console.log(result);
-  
-  if(result) setFetchError(result);
+  const result = await apiRequest(API_URL,optionObj);
+  if(result) setFetchError(result) 
 
 }
 
@@ -106,14 +106,6 @@ const handleSubmit = (e)=>{
 }
   return (
     <div className='App'>
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-        </ul>
-      </nav>
-      <Routes>
-        <Route path="/" element ={<Home/>}/>
-      </Routes>
       <Header title="Praveen List"/>
       <Additem className='additem'
         newItem = {newItem}
@@ -126,7 +118,7 @@ const handleSubmit = (e)=>{
       />
       <main className='main'>
         {isLoading && <p>{ `Loading items....`}</p>}
-        {fetchError && <p>{`Error : ${"Data Not Recieved"}`}</p>}
+        {fetchError && <p>{`Error : ${fetchError}`}</p>}
         {
           !isLoading && !fetchError &&
           <Content className="content"

@@ -1,0 +1,30 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+    display: none;
+  }
+
+.header{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+button{
+    flex-grow: 1;
+    padding: 5px;
+}
+.list{
+    margin: 5px;
+    padding: 10px;
+}
+.button:active{
+    background-color: black;
+    color: white;
+}

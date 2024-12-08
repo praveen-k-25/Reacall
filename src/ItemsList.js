@@ -15,6 +15,6 @@ const ItemsList = ({items,handleCheck,deleteItem}) => {
            )}
        </ul>
   )
-}
+} 
 
 export default ItemsList 
